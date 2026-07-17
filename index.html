@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>北市大暑期地球科學課程｜Week 1 課程導覽與建置指南</title>
+  <style>
+    :root {
+      --primary: #2c5e43; /* 深森林綠 */
+      --primary-light: #eef5f1;
+      --accent: #d97706; /* 溫暖琥珀橙 */
+      --text: #1f2937;
+      --bg: #fafaf9; /* 溫潤暖白 */
+      --white: #ffffff;
+      --border: #e5e7eb;
+      --mono: #374151;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      padding: 0;
+    }
+
+    /* 頂部橫幅 */
+    header {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 5px solid var(--accent);
+    }
+    
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* 導覽列 */
+    nav {
+      background-color: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 5px 10px;
+    }
+    
+    .nav-container a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 15px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .nav-container a:hover {
+      color: var(--primary);
+      background-color: var(--primary-light);
+      border-radius: 4px;
+    }
+
+    /* 主容器 */
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* 區塊卡片設計 */
+    section {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.04);
+      border-left: 5px solid var(--primary);
+    }
+    
+    section.accent-border {
+      border-left-color: var(--accent);
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    section.accent-border h2 {
+      color: var(--accent);
+    }
+
+    h3 {
+      color: #1e3a8a; /* 深藍色 */
+      font-size: 1.2rem;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    /* 清單樣式 */
+    ul, ol {
+      margin-bottom: 20px;
+      padding-left: 25px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* 表格樣式 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+    
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 15px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    /* 程式碼樣式 */
+    pre, code {
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      background-color: #f3f4f6;
+      border-radius: 4px;
+    }
+    
+    code {
+      padding: 2px 6px;
+      font-size: 0.9em;
+      color: #c2185b;
+    }
+    
+    pre {
+      padding: 15px;
+      overflow-x: auto;
+      margin: 15px 0;
+      border: 1px solid var(--border);
+    }
+    
+    pre code {
+      padding: 0;
+      color: inherit;
+      background-color: transparent;
+    }
+
+    /* 流程圖或高亮框 */
+    .flowchart {
+      background-color: var(--primary-light);
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 15px;
+      font-family: monospace;
+      margin: 15px 0;
+      white-space: pre-wrap;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 12px;
+      background-color: #f3f4f6;
+      color: #4b5563;
+      margin-right: 5px;
+    }
+    
+    .badge-success {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+    
+    .badge-warning {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+
+    /* 響應式調整 */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      header h1 {
+        font-size: 1.6rem;
+      }
+      section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>北市大暑期地球科學課程</h1>
+    <p>地震學、地球物理與 AI／Agent 輔助教學實作 ── Week 1 導覽與建置總匯網頁</p>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <a href="#syllabus">六週課程計畫</a>
+      <a href="#handout">Week 1 課堂講義</a>
+      <a href="#setup-guide">A/B 方案建置指南</a>
+      <a href="#checklist">安裝與帳號檢查表</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    
+    <!-- 區塊一：課程計畫 -->
+    <section id="syllabus">
+      <h2>六週課程計畫總覽</h2>
+      <p>本課程是為中小學現職教師設計的暑期地球科學課程，內容以<strong>地震學與地球物理學</strong>為主軸，導入 AI／Agent 工具與雲端平台，產出一份可帶回學校使用的地震教學作品。</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>週次</th>
+            <th>日期</th>
+            <th>主題</th>
+            <th>主要工具與案例</th>
+            <th>可檢核作業</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Week 1</td>
+            <td>7/17</td>
+            <td>課程介紹、軟體安裝、工作流建立</td>
+            <td>Google GWS、GitHub、Apps Script、opencode、Antigravity</td>
+            <td><strong>作業 1：完成個人數位學習工作區</strong></td>
+          </tr>
+          <tr>
+            <td>Week 2</td>
+            <td>7/24</td>
+            <td>地震儀、加速度、地震動與震度</td>
+            <td>手機感測器、Google Sheets、IRIS 搖晃活動</td>
+            <td><strong>作業 2：簡易震動觀測活動設計</strong></td>
+          </tr>
+          <tr>
+            <td>Week 3</td>
+            <td>7/31</td>
+            <td>到時差、旅行時間曲線與震央定位</td>
+            <td>IRIS 定位活動、Python、opencode</td>
+            <td><strong>作業 3：震央定位教學範例設計</strong></td>
+          </tr>
+          <tr>
+            <td>Week 4</td>
+            <td>8/07</td>
+            <td>課本第 4 章精讀與真實地震波形</td>
+            <td>jAmaSeis、Hugging Face Dataset、真實波形</td>
+            <td><strong>作業 4：第 4 章導讀與波形分析小報告</strong></td>
+          </tr>
+          <tr>
+            <td>Week 5</td>
+            <td>8/14</td>
+            <td>規模、震度、場址效應與建物反應</td>
+            <td>IRIS 規模震度、Vercel 網頁部署、GAS</td>
+            <td><strong>作業 5：地震防災互動網頁初版</strong></td>
+          </tr>
+          <tr>
+            <td>Week 6</td>
+            <td>8/21</td>
+            <td>野外實驗、成果整合與教案發表</td>
+            <td>微動/地震儀、Teachable Moments、GitHub Pages</td>
+            <td><strong>作業 6：期末成果發表與教案分享</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 區塊二：課堂講義 -->
+    <section id="handout" class="accent-border">
+      <h2>Week 1 課堂講義：數位工作區建立</h2>
+      <p>今日目標是讓每位老師將基本環境建置完成，為後續五週實作打下穩健地基。請依序完成以下「今日要做的五件事」：</p>
+      
+      <h3>1. 建立 Google Drive 課程資料夾</h3>
+      <p>於 Google 雲端硬碟建立主資料夾 <code>北市大暑期地球科學課程_姓名</code>，並在內建立 6 個子資料夾：</p>
+      <div class="flowchart">
+北市大暑期地球科學課程_姓名/
+├── week01_setup/
+├── week02_ground_shaking/
+├── week03_eq_location/
+├── week04_seismogram/
+├── week05_site_effect/
+└── week06_final_project/</div>
+
+      <h3>2. 建立 Google Form 測試表單</h3>
+      <p>建立名稱為 <code>Week 1 課程回饋與學習目標</code> 的表單，包含：<strong>姓名</strong>、<strong>任職學校/領域</strong>、<strong>想學的地震主題</strong>、<strong>想學的數位工具</strong>、<strong>想帶回學校教的概念</strong>等 5 題。</p>
+
+      <h3>3. 連接 Google Sheets 試算表</h3>
+      <p>在表單的「回應」分頁點選「連結至試算表」，建立並確認表單回應能正常寫入該試算表中。</p>
+
+      <h3>4. 測試 Google Apps Script (GAS)</h3>
+      <p>在試算表中開啟「擴充功能」→「Apps Script」，貼上以下測試碼並執行與授權：</p>
+      <pre><code>function courseHello() {
+  SpreadsheetApp.getActiveSpreadsheet().toast("北市大暑期地球科學課程：GAS 測試成功！");
+}</code></pre>
+
+      <h3>5. 建立 GitHub 個人 Repository</h3>
+      <p>建立公開 Repo：<code>earth-science-summer-2026-yourname</code>，並初始化包含 <code>README.md</code>，寫下您的 100-200 字個人學習目標。</p>
+    </section>
+
+    <!-- 區塊三：A/B 方案建置指南 -->
+    <section id="setup-guide">
+      <h2>學員資訊登記：Google 表單＋自動寄信設定指南</h2>
+      <p><strong>用途：蒐集上課同學的姓名、學校與 Gmail，並在填寫後自動寄送課程資源連結。</strong></p>
+      
+      <div class="flowchart">同學填寫 Google 表單 ──> 自動寫入 Google 試算表 ──> Apps Script 自動寄信 ──> 同學收到課程歡迎信</div>
+
+      <h3>【做法 A：一鍵建置（建議）】</h3>
+      <ol>
+        <li>打開 <a href="https://script.google.com" target="_blank">Google Apps Script</a>，建立新專案。</li>
+        <li>將 <code>reference/gas/CourseRegistration.gs</code> 內容全選貼上至編輯器中。</li>
+        <li>修改開頭 <code>COURSE_CONFIG</code> 中的網址與相關資訊，儲存專案。</li>
+        <li>下拉選單選擇 <code>setupCourseRegistration</code> 並點擊「執行」，完成 Google 權限驗證授權。</li>
+        <li>至 Google 雲端硬碟確認自動生成的表單與試算表。填寫測試表單，確認自動寄信正常。</li>
+      </ol>
+
+      <h3>【做法 B：手動逐步建立】</h3>
+      <ol>
+        <li>手動建立 Google 表單與題目，並連結至新的 Google 試算表。</li>
+        <li>開啟該試算表的「擴充功能」→「Apps Script」，貼上 <code>CourseRegistration.gs</code> 的代碼。</li>
+        <li><strong>重要！</strong>請在專案中新增並執行以下安裝觸發器專用程式碼，避免重複建立表單資源：</li>
+      </ol>
+      <pre><code>function installTriggerOnThisSpreadsheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  PropertiesService.getScriptProperties().setProperties({
+    SPREADSHEET_ID: ss.getId(),
+    COURSE_WEB_URL: 'https://github.com/oceanicdayi/Utaipei_2026_summer',
+    COURSE_GITHUB_URL: 'https://github.com/oceanicdayi/Utaipei_2026_summer',
+    EMAIL_SUBJECT: '【北市大暑期地球科學課程】歡迎加入｜課程資源連結',
+    SENDER_NAME: '北市大暑期地球科學課程'
+  });
+
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; i < triggers.length; i++) {
+    if (triggers[i].getHandlerFunction() === 'onCourseFormSubmit') {
+      ScriptApp.deleteTrigger(triggers[i]);
+    }
+  }
+
+  ScriptApp.newTrigger('onCourseFormSubmit')
+    .forSpreadsheet(ss)
+    .onFormSubmit()
+    .create();
+  Logger.log('已在此試算表安裝表單提交後自動寄信觸發器。');
+}</code></pre>
+    </section>
+
+    <!-- 區塊四：檢查表 -->
+    <section id="checklist" class="accent-border">
+      <h2>Week 1 安裝與帳號檢查表</h2>
+      <p>確認您的個人數位學習工作區已建置完成：</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>項目類型</th>
+            <th>必備項目</th>
+            <th>用途說明</th>
+            <th>最低完成標準</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>帳號申請</td>
+            <td>Google, GitHub, Hugging Face, Vercel</td>
+            <td>保存教材、程式、數據集與發布網頁</td>
+            <td>前兩者必備，後兩者可於課後補齊</td>
+          </tr>
+          <tr>
+            <td>軟體安裝</td>
+            <td>VS Code, Git, Python, Chrome</td>
+            <td>教材編輯、版本控制、科學數據運算與分析</td>
+            <td>至少完成 2 項安裝</td>
+          </tr>
+          <tr>
+            <td>雲端與 GAS</td>
+            <td>Google Drive 6個子資料夾、GAS <code>courseHello()</code></td>
+            <td>上傳作業、完成基礎自動化提示測試</td>
+            <td><span class="badge badge-success">必須完成</span></td>
+          </tr>
+          <tr>
+            <td>GitHub Repo</td>
+            <td><code>earth-science-summer-2026-yourname</code></td>
+            <td>含 <code>README.md</code>，寫入 100-200 字學習目標</td>
+            <td><span class="badge badge-success">必須完成</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <footer style="background-color: var(--primary); color: var(--white); text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid var(--accent); margin-top: 40px;">
+    <p>© 2026 北市大暑期地球科學課程團隊. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
